@@ -7,7 +7,7 @@ version 0.11.1.
 
 ###Preview
 
-git clone https://github.com/angeliquekom/forecast-demo-angularjs-app.git
+`git clone https://github.com/angeliquekom/forecast-demo-angularjs-app.git`
 
 `cd forecast-demo-angularjs-app`
 
