@@ -1,0 +1,99 @@
+<div class="row">
+  <div class="col-sm-12"><h2>Next Forecast: {{vm.cityDataMain[0].list[0].dt_txt}}</h2></div>
+  <div class="col-sm-4" ng-repeat="city in vm.cityDataMain"
+       ng-click="vm.ActiveCity=city"
+       ng-style="{'cursor':'pointer'}">
+      <div class="city-block">
+          <div class="city"
+               ng-style="{'background':
+                            'url(http://openweathermap.org/img/w/{{city.list[0].weather[0].icon}}.png) no-repeat',
+                          'background-position':
+                            'center',
+                          'background-size': '90px 90px'}">
+              {{city.city.name}}
+              <div ng-style="{'font-weight': '200'}">{{city.list[0].weather[0].description}}</div>
+          </div>
+          <div class="row" ng-style="{'margin-top': '-60px','text-align': 'center'}">
+              <div class="col-sm-12"><div ng-style="{'font-weight': '200', 'font-size': '20px','padding-bottom':'10px'}">{{city.list[0].main.temp}} &nbsp; K</div></div>
+              <div class="col-sm-4">
+                <p><span ng-style="{'font-weight': '100'}">Min Temperature</span><br/>
+                <span ng-style="{'font-weight': '500'}">{{city.list[0].main.temp_min}}&nbsp; K</span></p>
+                <p><span ng-style="{'font-weight': '100'}">Max Temperature</span><br/>
+                <span ng-style="{'font-weight': '500'}">{{city.list[0].main.temp_max}}&nbsp; K</span></p>
+              </div>
+              <div class="col-sm-4">
+                <p><span ng-style="{'font-weight': '100'}">Pressure</span><br/>
+                <span ng-style="{'font-weight': '500'}">{{city.list[0].main.pressure}}</span></p>
+                <p><span ng-style="{'font-weight': '100'}">Humidity</span><br/>
+                <span ng-style="{'font-weight': '500'}">{{city.list[0].main.humidity}}&nbsp%</span></p>
+                <p><span ng-style="{'font-weight': '100'}">Cloudiness</span><br/>
+                <span ng-style="{'font-weight': '500'}">{{city.list[0].clouds.all}}&nbsp%</span></p>
+              </div>
+              <div class="col-sm-4">
+                <p><span ng-style="{'font-weight': '100'}">Wind</span><br/>
+                <span ng-style="{'font-weight': '500'}">{{city.list[0].wind.speed}}</span></p>
+                <p><span ng-style="{'font-weight': '100'}">Wind direction</span><br/>
+                <span ng-style="{'font-weight': '500'}">{{city.list[0].wind.deg}}</span></p>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<div ng-show="vm.ActiveCity" class="row" class="next-days">
+    <div class="col-sm-12">
+        <h2>Summary: <span ng-style="{'font-weight': '500'}">{{vm.ActiveCity.city.name}}</span>
+        </h2>
+    </div>
+    <div class="col-sm-12">
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+                <th>
+                    Day/Time
+                </th>
+                <th>
+                </th>
+                <th>
+                    Temperature
+                </th>
+                <th>
+                    Min Temperature
+                </th>
+                <th>
+                    Max Temperature
+                </th>
+                <th>
+                    Pressure
+                </th>
+                <th>
+                    Humidity
+                </th>
+                <th>
+                    Cloudiness
+                </th>
+                <th>
+                    Wind
+                </th>
+                <th>
+                    Wind Direction
+                </th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="forecast in vm.ActiveCity.list">
+                    <td><span ng-style="{'font-weight': '700'}">{{forecast.dt_txt}}</span></td>
+                    <td><img src="http://openweathermap.org/img/w/{{forecast.weather[0].icon}}.png" width="35" height="35"/></td>
+                    <td><p>{{forecast.main.temp}}&nbsp; K</p><p>{{forecast.main.temp-273.15 | number:2}}&nbsp; C</p></td>
+                    <td><p>{{forecast.main.temp_min}}&nbsp; K</p><p>{{forecast.main.temp_min-273.15 | number:2}}&nbsp; C</p></td>
+                    <td><p>{{forecast.main.temp_max}}&nbsp; K</p><p>{{forecast.main.temp_max-273.15 | number:2}}&nbsp; C</p></td>
+                    <td>{{forecast.main.pressure}}</td>
+                    <td>{{forecast.main.humidity}}&nbsp;%</td>
+                    <td>{{forecast.clouds.all}}&nbsp;%</td>
+                    <td>{{forecast.wind.speed}}</td>
+                    <td>{{forecast.wind.deg}}</td>
+                </tr>
+            </tbody>
+          </table>
+        </div>
+    </div>
+</div>
